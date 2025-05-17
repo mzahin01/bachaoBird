@@ -1,25 +1,26 @@
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(GameWidget(game: FlappyGame()));
+}
+
 class FlappyGame extends FlameGame {
+  late SpriteComponent bird;
+
   @override
-  Color backgroundColor() => const Color(0xFF87CEEB); // Sky blue
+  Color backgroundColor() => const Color(0xFF87CEEB);
 
   @override
   Future<void> onLoad() async {
-    // This will be used to load bird and pipe assets later.
-    super.onLoad();
-  }
+    final birdSprite = await loadSprite('bird.png');
+    bird =
+        SpriteComponent()
+          ..sprite = birdSprite
+          ..size = Vector2(50, 50) // Width, height
+          ..position = size / 2; // Center of the screen
 
-  @override
-  void update(double dt) {
-    super.update(dt);
-    // Game logic like gravity and movement will go here.
-  }
-
-  @override
-  void render(Canvas canvas) {
-    super.render(canvas);
-    // Custom drawing (if needed)
+    add(bird);
   }
 }
