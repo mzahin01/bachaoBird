@@ -38,4 +38,12 @@ class FlappyGame extends FlameGame with TapDetector, HasCollisionDetection {
   void onTapDown(TapDownInfo info) {
     bird.flap(); // Make the bird "flap" (jump upwards).
   }
+
+  void reset() {
+    bird.velocityY = 0;
+    bird.position = Vector2(size.x / 4, size.y / 2);
+
+    topPipe.position = Vector2(size.x, -100);
+    bottomPipe.position = Vector2(size.x, size.y - 200);
+  }
 }

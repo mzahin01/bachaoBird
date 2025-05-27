@@ -62,10 +62,10 @@ class Bird extends SpriteComponent with HasGameReference, CollisionCallbacks {
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
 
-    // Pause the game engine (typically used for game over).
+    // Pause the game engine (like freezing the game)
     game.pauseEngine();
 
-    // Uncomment the line below to print "Game Over!" to the console.
-    // print('Game Over!');
+    // Show the restart button overlay
+    game.overlays.add('GameOver');
   }
 }

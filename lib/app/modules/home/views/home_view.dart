@@ -8,8 +8,33 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: GameWidget(game: FlappyGame())));
+    final game = FlappyGame();
+    return Scaffold(
+      body: Center(
+        child: GameWidget(
+          game: game,
+          overlayBuilderMap: {
+            'GameOver': (_, game) => buildRestartButton(game as FlappyGame),
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget buildRestartButton(FlappyGame game) {
+    return Center(
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+        onPressed: () {
+          game.reset();
+          game.overlays.remove('GameOver');
+          game.resumeEngine();
+        },
+        child: const Text('Restart', style: TextStyle(color: Colors.black)),
+      ),
+    );
   }
 }
